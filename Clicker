@@ -1,0 +1,405 @@
+Let's make a game!
+    name:Pizza Clicker
+    by:Fuzz
+    desc:Build up your pizza empire by clicking. You can also buy animatronics to help click pizzas for you! (all characters belong to their owner Scott, this is just a fangame)
+    created:05/31/2020
+    updated:12/16/2020
+    version:0.2.0
+ Achievements
+        *pepperoniSecret
+    name: Pepperoni Secret
+    desc: You unlocked the Pepperoni Oven, granting you access to more upgrades!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716926866220646440/pepperonipizzatime.png
+    req:have largePizzaMaker
+ *pizzabil
+    name: 1 Billion!
+    desc: Who needs 1 billion pizzas?
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716926875653374042/pizzatime.png
+    req:1000000 pizza
+*cook
+name:Now we're cooking!
+desc:It took you this long to get a working oven?
+icon:https://cdn.discordapp.com/attachments/647999749588254781/716946588660138034/functional.png
+req:superPizza
+    *ogang
+    name:The Classics
+    desc:You unlocked all the classic animatronics!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716775676069281862/freidn.png
+    req:1 freddy
+    req:1 bonnie
+    req:1 chica
+    req:1 fox
+ 
+    *toys
+    name:The Toys
+    desc:You unlocked all the Toy Animatronics!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716843514452770886/fortnite.png
+    req:1 tfreddy
+    req:1 tbon
+    req:1 tchica
+    req:1 tfox
+    req:Animbb
+    req:AnimP
+ 
+*forgot
+    name:The Forgotten 
+    desc:You unlocked all the Fnaf 3 Animatronics!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733198592159907930/Srpong.png
+    req:1 gbonnie
+    req:1 phantomfred
+	req:1 phantomchick
+	req:1 phantomfox
+	req:1 phantombb
+	req:1 phantomp
+	req:1 phantommangle
+ 
+ 
+CSS
+    #game
+  {
+ 
+ 
+    font-family:"Consolas",Times,serif;
+    color:black;
+  }
+  .thing
+  {
+    border-radius:8px;
+    background:rgba(255,255,255,0.5);
+  }
+ 
+Settings
+    tiling background:https://cdn.discordapp.com/attachments/647999749588254781/716772128682410004/bkacogrund.png
+    building cost increase : 210%
+    building cost refund : 2%
+ 
+Layout
+    *main
+  contains:res, buttons
+  *res
+    header:FNaF Pizza Clicker  
+ contains:Resources
+    class:fullWidth
+  *buttons
+    contains:Buttons
+*store
+  contains:buildings, upgrades
+  *buildings
+    contains:BulkDisplay, Buildings
+    header:Animatronics
+    tooltip origin:left
+  *upgrades
+    contains:Upgrades
+    header:Upgrades
+    costs:hide
+ 
+ *achievs
+    in:main
+    contains:Achievements
+ 
+Buttons
+    *pizzaButton
+        name:Click the Pizza
+        desc:Click the pizza to make more pizzas!
+        on click:anim icon wobble
+        on click:yield 1 pizza
+        on click:if (have largePizzaMaker and chance(15%)) yield 1 Largepizza
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716850863976742983/pizzatimebutcoolest_2.png
+        no text
+        class:bigButton hasFlares
+        icon class:shadowed
+        tooltip origin:bottom
+        tooltip class:red
+ 
+Resources
+    *pizza|pizzas
+        name:Pizza|Pizzas
+        desc:These are you pizzas! Use them to buy animatronics to help make more pizzas for the kiddos
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716926875653374042/pizzatime.png
+        class:noBackground
+        show earned
+ 
+    *Largepizza|Largepizzas
+        name:Pepperoni Pizza|Pepperoni Pizzas
+        desc:This is a Pepperoni Pizza, they're only rare because we're never bothered enough to make them!
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716926866220646440/pepperonipizzatime.png
+        class:noBackground
+        hidden when 0
+ 
+*Olivepizza|Olivepizzas
+        name:Olive Pizza|Olive Pizzas
+        desc:This is a Olive Pizza, who actually eats these?
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716926866220646440/pepperonipizzatime.png
+        class:noBackground
+        hidden when 0
+ 
+Upgrades
+    *largePizzaMaker
+        name:Pepperoni Pizza Maker
+        desc:This is a Pepperoni Pizza maker, you can use it to make Pepperoni Pizzas.<//><b>Effect:</b><.>10% chance of making a Pepperoni Pizza per click.
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716926866220646440/pepperonipizzatime.png
+        cost:1000 pizza
+        req:5 freddy
+*superPizzaclicker
+    name:Improved Pizza Clicker
+    desc:Improve your pizza clicking power! <//><b>Effect:</b><.>Doubles the amount of pizzas made when you click
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716926875653374042/pizzatime.png
+    passive:multiply pizza yield of pizzaButton by 2
+    cost:1000 pizza
+    req:200 pizza
+ 
+*pizzasuper
+    name:Super Pizza Cooker 3000
+    desc:Improve your pizza clicking power! <//><b>Effect:</b><.>Triples the amount of pizzas made when you click
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716926875653374042/pizzatime.png
+    passive:multiply pizza yield of pizza by 3
+    cost:5000 pizza
+    req:1000 pizza
+ 
+*superPizza
+    name:Working Oven
+    desc:Improve your pizza clicking power! <//><b>Effect:</b><.>Increase your pizza clicking rate by 3
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716946588660138034/functional.png
+    passive:multiply pizza yield of pizzaButton by 3.5
+	 on tick:yield 1 Largepizza
+    cost:10000 pizza
+    req:9000 pizza
+*superover
+    name:Superheated Oven
+    desc:Improve your pizza clicking power! <//><b>Effect:</b><.>Increase your Pepperoni Pizza creation rate by 2
+        icon:https://cdn.discordapp.com/attachments/647999749588254781/716946568984526898/SUPERHOT.png
+    passive:multiply yield of Largepizza by 2
+    cost:100000 pizza
+    req:90000 pizza
+ 
+*ovenflame
+	name:Oven Of 1000 Suns
+	desc:This oven is just on fire... <//><b>Effect:</b><.>Upgrades Everything by 5
+	 icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:1000000 pizza
+    req:1000000 pizza  
+	passive:multiply pizza yield of fox by 5
+	passive:multiply pizza yield of freddy by 5
+	passive:multiply pizza yield of chica by 5
+	passive:multiply pizza yield of bonnie by 5
+	 passive:multiply pizza yield of tfox by 5
+	passive:multiply pizza yield of tfreddy by 5
+	passive:multiply pizza yield of tchica by 5
+	passive:multiply pizza yield of tbon by 5
+	passive:multiply yield of gbonnie by 5
+ 
+    *improveAnimF
+        name:Improve Freddy
+        desc:Improve your animatronics today! Buy this upgrade to make your Freddy Fazbear work faster and better!<//><b>Effect:</b><.>Increases productivity of Freddy Fazbear by 2%
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716775676069281862/freidn.png
+    passive:multiply pizza yield of freddy by 2
+    cost:10 Largepizza
+    req:15 freddy
+ 
+ *improveAnimB
+        name:Improve Bonnie
+        desc:Improve your animatronics today! Buy this upgrade to make your Bonnie the Bunny work faster and better!<//><b>Effect:</b><.>Increases productivity of Bonnie by 2%
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716783526778765382/berniesanders.png
+    passive:multiply pizza yield of bonnie by 2
+    cost:25 Largepizza
+    req:25 bonnie
+*improveAnimc
+        name:Improve Chica
+        desc:Improve your animatronics today! Buy this upgrade to make your Chica the Chicken work faster and better!<//><b>Effect:</b><.>Increases productivity of Chica by 5%
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716842470130057317/theyrejustjealousofmysexyvixenwife.png
+    passive:multiply pizza yield of chica by 2
+    cost:35 Largepizza
+    req:20 chica
+*improveAnimFox
+name:Improve Foxy
+        desc:Improve your animatronics today! Buy this upgrade to make your Foxy the Fox work faster and better!<//><b>Effect:</b><.>Increases productivity of Foxy by 5%
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716842455374233610/fuck.png
+    passive:multiply pizza yield of fox by 2
+    cost:35 Largepizza
+    req:10 fox
+*gfreddy
+name:Golden Freddy
+        desc:???<//><b>Effect:</b><.>Increases productivity of all classics by 3
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733188238197522482/freidng.png
+    passive:multiply pizza yield of fox by 3
+	passive:multiply pizza yield of freddy by 3
+	passive:multiply pizza yield of chica by 3
+	passive:multiply pizza yield of bonnie by 3
+    cost:1000 Largepizza
+    req:100 freddy
+	req:50 fox
+	req:60 chica
+	req:60 bonnie
+ 
+*improveAnimtf
+name:Improve Toy Freddy
+        desc:Improve your animatronics today! Buy this upgrade to make your Toy Freddy Animatonic make Pepperoni Pizzas too!<//><b>Effect:</b><.>15% chance of making a Pepperoni Pizza per click.
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716843514452770886/fortnite.png
+    cost:40 Largepizza
+    req:5 tfreddy
+ 
+	passive:multiply pizza yield of tfreddy by 2
+*improveAnimtc
+name:Improve Toy Chica
+        desc:Improve your animatronics today! Buy this upgrade to make your Toy Chica Animatonic produce pizzas better and faster!<//><b>Effect:</b><.>Multiplies Pizza creation by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716935022917189672/staringtwiceinarowmygodthenerveofsomepeople.png
+    cost:40 Largepizza
+    req:5 tchica
+    passive:multiply pizza yield of tchica by 3
+ 
+*improveAnimtb
+name:Improve Toy Bonnie
+        desc:Improve your animatronics today! Buy this upgrade to make your Toy Bonnie Animatonic produce pizzas better and faster!<//><b>Effect:</b><.>Multiplies Pizza creation by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733183173248417842/Femboy_Bernie.png
+    cost:40 Largepizza
+    req:5 tbon
+    passive:multiply pizza yield of tbon by 2.8
+ 
+*improveAnimtfox
+name:Improve Mangle
+        desc:Improve your animatronics today! Buy this upgrade to attempt to fix Mangle!<//><b>Effect:</b><.>Multiplies Pizza creation by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733188260418814062/HOt_dead_fox_man.png
+    cost:50 Largepizza
+    req:5 tfox
+    passive:multiply pizza yield of tfox by 4
+ 
+*Animbb
+name:Balloon Boy
+        desc:Buy a Balloon Boy Today! It'll hand out balloons to kids, and be careful it might take your battery too!<//><b>Effect:</b><.>Multiplies Pizza clicking creation by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733194420517601298/Ball_man.png
+    cost:55 Largepizza
+    req:5 tfreddy
+    passive:multiply pizza yield of pizzaButton by 1.8
+*AnimP
+name:Puppet
+        desc:Buy a Puppet Today! It'll keep your kids safe, and the child murders out!<//><b>Effect:</b><.>Multiplies Pepperoni Pizza creation by 3 and Pizzas by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733194399881887754/kpoop.png
+    cost:70 Largepizza
+    req:10 tfreddy
+    passive:multiply yield of Largepizza by 3
+    passive:multiply yield of pizza by 3
+ 
+*phantomfred
+name:Phantom Freddy
+        desc:Is it real? who knows! <//><b>Effect:</b><.>Multiplies Olive Pizza creation by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:7000 Olivepizzas
+    req:10 gbonnie
+    passive:multiply yield of Olivepizza by 2
+ 
+*phantomchick
+name:Phantom Chica
+        desc:Is it real? who knows! <//><b>Effect:</b><.>Multiplies Springtrap by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:7800 Olivepizzas
+    req:1 phantomfred
+    passive:multiply yield of gbonnie by 2
+ 
+*phantomfox
+name:Phantom Foxy
+        desc:Is it real? who knows! <//><b>Effect:</b><.>Multiplies Springtrap by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:70000 Olivepizzas
+    req:1 phantomfred
+    passive:multiply yield of gbonnie by 2
+ 
+*phantombb
+name:Phantom Balloon Boy
+        desc:Is it real? who knows! <//><b>Effect:</b><.>Multiplies pepperoni pizzas by 2
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:90000 Olivepizzas
+    req:15 gbonnie
+    passive:multiply yield of Largepizzas by 2
+ 
+*phantomp
+name:Phantom Puppet
+        desc:Is it real? who knows! <//><b>Effect:</b><.>Multiplies pepperoni pizzas by 2.5
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:90000 Olivepizzas
+    req:15 gbonnie
+    passive:multiply yield of Largepizzas by 2
+ 
+*phantommangle
+name:Phantom Mangle
+        desc:Is it real? who knows! <//><b>Effect:</b><.>Multiplies pepperoni pizzas by 3
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716848171640291443/chess.png
+    cost:150000 Olivepizzas
+    req:20 gbonnie
+    passive:multiply yield of Largepizzas by 3
+ 
+ 
+ 
+Buildings
+    *freddy
+  name:Freddy Fazbear
+  desc:The classic Freddy Fazbear, Loves hugs.
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716775676069281862/freidn.png
+  on tick:yield 1 pizzas
+  cost:50 pizza
+ 
+    *bonnie
+  name:Bonnie the Bunny
+  desc:The original Bonnie the Bunny, Rock on!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716783526778765382/berniesanders.png
+  on tick:yield 5 pizzas
+  cost:75 pizza
+req:5 freddy
+    *chica
+  name:Chica the Chicken
+  desc:The original Chica the Chicken, Pizza!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716842470130057317/theyrejustjealousofmysexyvixenwife.png
+  on tick:yield 5 pizzas
+  cost:85 pizza
+req:5 bonnie
+    *fox
+  name:Foxy the Fox
+  desc:Out of order but still here, Arggg!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716842455374233610/fuck.png
+  on tick:yield 10 pizzas
+  cost:100 pizza
+req:5 chica
+ 
+    *tfreddy
+  name:Toy Freddy
+  desc:New and Improved!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716843514452770886/fortnite.png
+  on tick:yield 15 pizzas
+on tick:yield 1 Largepizza
+  cost:30 Largepizza
+req:10 fox
+    *tchica
+  name:Toy Chica
+  desc:Let's Party!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/716935022917189672/staringtwiceinarowmygodthenerveofsomepeople.png
+  on tick:yield 15 pizzas
+on tick:yield 2 Largepizzas
+  cost:40 Largepizza
+req:3 tfreddy
+    *tbon
+  name:Toy Bonnie
+  desc:Something Borrowed, Something New!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733183173248417842/Femboy_Bernie.png
+  on tick:yield 15 pizzas
+on tick:yield 2 Largepizzas
+  cost:40 Largepizza
+req:3 tfreddy
+ 
+    *tfox
+  name:Mangle
+  desc:*static noises*
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733188260418814062/HOt_dead_fox_man.png
+  on tick:yield 20 pizzas
+on tick:yield 2 Largepizzas
+  cost:55 Largepizza
+    req:2 tbon
+    req:2 tchica
+ 
+*gbonnie
+  name:SpringTrap
+  desc:Now a marketable plushie!
+    icon:https://cdn.discordapp.com/attachments/647999749588254781/733198592159907930/Srpong.png
+  on tick:yield 5 Olivepizzas
+  on tick:yield 1 Largepizza
+	on tick:yield 15 pizzas
+  cost:70 Largepizza 
+    req:1 AnimP
